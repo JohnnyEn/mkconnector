@@ -85,7 +85,7 @@ const postTweet = async (originalMisskeyNote) => {
   processMediaItems(misskeyNote)
     .then(async (twitterMediaIdsArray) => {
       const convertedNoteToTweet = misskeyNoteConverter(misskeyNote, twitterMediaIdsArray);
-      const tweetText = trimNoteText(misskeyNote.text, misskeyNote.id);
+      const tweetText = await trimNoteText(misskeyNote.text, misskeyNote.id);
 
       await twitterV1Client.v1.tweet(tweetText, convertedNoteToTweet);
     });
