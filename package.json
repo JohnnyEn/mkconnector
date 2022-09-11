@@ -1,0 +1,50 @@
+{
+  "name": "misskey-connector",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "npm run clean && babel ./src/bin/www.js -d dist/bin ENV=production",
+    "dev": "nodemon --exec babel-node ./src/bin/www.js ENV=development",
+    "start": "babel-node ./src/bin/www.js ENV=production",
+    "clean": "rm -rf ./dist && mkdir dist"
+  },
+  "dependencies": {
+    "babel-plugin-dotenv": "^0.1.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.2",
+    "express": "~4.16.1",
+    "file-type": "^18.0.0",
+    "http-errors": "^1.6.3",
+    "misskey-js": "0.0.14",
+    "morgan": "~1.9.1",
+    "node-url-shortener": "^2.0.3",
+    "node-wget-promise": "^0.1.6",
+    "read-chunk": "^4.0.3",
+    "tmp": "^0.2.1",
+    "twitter-api-sdk": "^1.1.0",
+    "twitter-api-v2": "^1.12.5",
+    "ws": "^8.8.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.18.13",
+    "@babel/node": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "nodemon": "^2.0.19"
+  },
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "debug": true,
+        "targets": {
+          "node": "current"
+        }
+      }
+    ]
+  ]
+}

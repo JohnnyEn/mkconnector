@@ -1,0 +1,8 @@
+services:
+  express:
+    command: npm run start
+    ports:
+      - "4000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
