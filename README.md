@@ -14,7 +14,8 @@
 
 # Roadmap
 - Add Twitter V2 API OAUTH support
-- Add support for Facebook connection, conversion notes to FB posts
+- ~~Add support for Facebook connection, conversion notes to FB posts~~
+  - Posting directly to FB is not possible ATM due the API restrictions
 - Rewrite codebase to OOP classes
 - Simple config dashboard and service endpoints
 - Add Github CI/CD support out of box
