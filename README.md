@@ -5,7 +5,7 @@
 - Pull this repository
 - Convert .env to .env.development and .env.production, if you will use this script only as-is, your main file is .env.production
 - Write down your credentials into .env.files
-- Deploy edited repository to server and run prod-run.sh bash script
+- Deploy edited repository to server, set prod-run.sh to executable and run prod-run.sh bash script
 
 # Development:
 - Pull this repository
