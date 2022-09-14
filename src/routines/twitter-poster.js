@@ -72,7 +72,11 @@ const trimNoteText = async (misskeyNoteText, misskeyNoteId) => {
 };
 
 const postTweet = async (originalMisskeyNote) => {
-  if (originalMisskeyNote.localOnly || typeof originalMisskeyNote.mentions !== 'undefined') {
+  if (originalMisskeyNote.text.contains('#mknofb' || '#mknotwitter')) {
+    return;
+  }
+
+  if (originalMisskeyNote.localOnly || typeof originalMisskeyNote.mentions !== 'undefined' || typeof originalMisskeyNote.reply !== 'undefined') {
     return;
   }
 
