@@ -59,6 +59,10 @@ const generateShortUrl = async (misskeyNoteId) => {
 };
 
 const trimNoteText = async (misskeyNoteText, misskeyNoteId) => {
+  if (misskeyNoteText === null) {
+    return '';
+  }
+
   if (misskeyNoteText.length < TWEET_MAX_CHAR) {
     return misskeyNoteText;
   }
@@ -66,13 +70,14 @@ const trimNoteText = async (misskeyNoteText, misskeyNoteId) => {
   const shortNoteUrl = await generateShortUrl(misskeyNoteId);
   const HELLIP_LENGTH = 4;
   const noteTrimLength = shortNoteUrl.length + HELLIP_LENGTH;
-  const trimmedNoteText = misskeyNoteText.slice(0, TWEET_MAX_CHAR).slice(0, -noteTrimLength);
+  const trimmedNoteText = misskeyNoteText?.slice(0, TWEET_MAX_CHAR).slice(0, -noteTrimLength);
 
   return `${trimmedNoteText}... ${shortNoteUrl}`;
 };
 
 const postTweet = async (originalMisskeyNote) => {
-  if (originalMisskeyNote.text.contains('#mknotwitter')) {
+  console.log(originalMisskeyNote);
+  if (originalMisskeyNote.text !== null && originalMisskeyNote.text.includes('#mknotwitter')) {
     return;
   }
 
