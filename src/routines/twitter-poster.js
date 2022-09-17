@@ -21,32 +21,35 @@ const processMediaItems = async (misskeyNote) => {
   }
 
   return new Promise(async (resolve, reject) => {
+    const MAX_TWEET_MEDIA_LENGTH = 4;
     let mediaIdsArray = [];
 
-    await misskeyNote.files.forEach(async (file, index) => {
-      if (index < 4) {
-        const src = file.url;
-        const output = `/tmp/${file.name}`;
+    for (let i = 0; i < MAX_TWEET_MEDIA_LENGTH; i++) {
+      const file = misskeyNote.files[i];
+      const src = file.url;
+      const fileName = file.name.replace(/\s/g, '_');
+      const output = `/tmp/${fileName}`;
 
-        await wget(src, { output });
+      await wget(src, { output });
 
-        const fileType = await fileTypeFromFile(output);
-        const twitterMediaItemId = await twitterV1Client.v1.uploadMedia(output, { mimeType: fileType.mime });
+      const fileType = await fileTypeFromFile(output);
 
-        mediaIdsArray.push(twitterMediaItemId);
+      await twitterV1Client.v1.uploadMedia(output, { mimeType: fileType.mime })
+        .then((twittermediaItemId) => {
+          mediaIdsArray.push(twittermediaItemId);
 
-        exec(`rm ${output}`, (error, stdout, stderr) => {
-          if (error) {
-            console.log(error);
-            reject();
+          exec(`rm ${output}`, (error, stdout, stderr) => {
+            if (error) {
+              console.log(error);
+              reject();
+            }
+          });
+
+          if (i === misskeyNote.files.length - 1 || i === MAX_TWEET_MEDIA_LENGTH) {
+            resolve(mediaIdsArray);
           }
         });
-      }
-
-      if (Object.keys(misskeyNote.files).length === index + 1) {
-        resolve(mediaIdsArray);
-      }
-    });
+    }
   });
 };
 
@@ -76,7 +79,6 @@ const trimNoteText = async (misskeyNoteText, misskeyNoteId) => {
 };
 
 const postTweet = async (originalMisskeyNote) => {
-  console.log(originalMisskeyNote);
   if (originalMisskeyNote.text !== null && originalMisskeyNote.text.includes('#mknotwitter')) {
     return;
   }
