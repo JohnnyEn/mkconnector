@@ -24,7 +24,7 @@ const processMediaItems = async (misskeyNote) => {
     const MAX_TWEET_MEDIA_LENGTH = 4;
     let mediaIdsArray = [];
 
-    for (let i = 0; i < MAX_TWEET_MEDIA_LENGTH; i++) {
+    for (let i = 0; (i < misskeyNote.files.length && i < MAX_TWEET_MEDIA_LENGTH); i++) {
       const file = misskeyNote.files[i];
       const src = file.url;
       const fileName = file.name.replace(/\s/g, '_');
@@ -45,9 +45,13 @@ const processMediaItems = async (misskeyNote) => {
             }
           });
 
-          if (i === misskeyNote.files.length - 1 || i === MAX_TWEET_MEDIA_LENGTH) {
+          if ((i === misskeyNote.files.length - 1 || i === MAX_TWEET_MEDIA_LENGTH - 1)) {
             resolve(mediaIdsArray);
           }
+        })
+        .catch((error) => {
+          console.log(error);
+          reject(error);
         });
     }
   });
