@@ -77,7 +77,8 @@ const trimNoteText = async (misskeyNoteText, misskeyNoteId) => {
   const shortNoteUrl = await generateShortUrl(misskeyNoteId);
   const HELLIP_LENGTH = 4;
   const noteTrimLength = shortNoteUrl.length + HELLIP_LENGTH;
-  const trimmedNoteText = misskeyNoteText?.slice(0, TWEET_MAX_CHAR).slice(0, -noteTrimLength);
+  const lineBreaksNumber = (misskeyNoteText.match(/\n/g)||[]).length;
+  const trimmedNoteText = misskeyNoteText?.slice(0, TWEET_MAX_CHAR).slice(0, -(noteTrimLength + lineBreaksNumber));
 
   return `${trimmedNoteText}... ${shortNoteUrl}`;
 };
