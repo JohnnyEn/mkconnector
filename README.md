@@ -1,5 +1,6 @@
 # Misskey Connector
 ## Node.js automatic client to repost your notes from Misskey to Twitter
+***Note: *** *this repository is under active development, try to keep updating. I'm active fixing bugs and adding new features*
 
 ### Usage:
 - Pull this repository
