@@ -1,6 +1,6 @@
 # Misskey Connector
 ## Node.js automatic client to repost your notes from Misskey to Twitter
-***Note: *** *this repository is under active development, try to keep updating. I'm active fixing bugs and adding new features*
+***Note:*** *this repository is under active development, try to keep updating. I'm active fixing bugs and adding new features*
 
 ### Usage:
 - Pull this repository
@@ -17,14 +17,19 @@
 - Add Twitter V2 API OAUTH support
 - ~~Add support for Facebook connection, conversion notes to FB posts~~
   - Posting directly to FB is not possible ATM due the API restrictions
-- Rewrite codebase to OOP classes
-- Simple config dashboard and service endpoints
+- Add MongoDB database for managing multiple accounts - ***Active development***
+- Add Misskey multiaccount support - ***Active development***
+- Add support for Facebook pages API - ***Active development***
+- Refactor codebase to OOP classes - ***Coming soon later this year***
+- ~~Simple config dashboard and service endpoints~~
+- Make out of box docker container support for easy server installation
 - Add Github CI/CD support out of box
 
 ### Used technology:
 - NodeJS
 - Express
 - Twitter 1 API
+- Facebook Graph API ***Coming soon***
 - Official Misskey API library
 
 ### Warning
