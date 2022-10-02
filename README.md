@@ -2,26 +2,42 @@
 ## Node.js automatic client to repost your notes from Misskey to Twitter
 ***Note:*** *this repository is under active development, try to keep updating. I'm actively fixing bugs and adding new features*
 
+### Simple one account usage:
+- For one account support switch to branch master-single-account
+- Convert .env to .env.development and .env.production, if you will use this script only as-is, your main file is .env.production
+- Fill up your .env.production file with desired credentials
+- Change bash script privilegies to be executable, `sudo chmod +x prod-run.sh`
+- Run with ./prod-run.sh
+
 ### Usage:
 - Pull this repository
 - Convert .env to .env.development and .env.production, if you will use this script only as-is, your main file is .env.production
 - Write down your credentials into .env.files
+- For best results with MongoDB migrations install npm package https://github.com/seppevs/migrate-mongo
+  - `npm i -g migrate-mongo`
+  - Use files in migrations folder, migrate-mongo-config.js need to fillup your MongoDB address for connection
+  - Run migrate-mongo create
+  - Copy body of example-migration.js to new created migration file and edit your imported data to MongoDB.
+- You could use MongoDB Compass for document creation.
+- Change bash script privilegies to be executable, `sudo chmod +x prod-run.sh`
 - Deploy edited repository to server, set prod-run.sh to executable and run prod-run.sh bash script
+- NOTE: Never share your MKCONNECTOR_API_REQUEST_AUTH bearer token from .env file. You could be nasty hacked by API requests...
+- NOTE: If you wouldn't like to use migrations, feel free to use API endpoints
 
 ### Development:
 - Pull this repository
 - Convert .env into .env.development
-- Run codebase with `docker-compose up`
+- Run codebase with `npm run docker-compose`
 
 ### Roadmap
 - Add Twitter V2 API OAUTH support
 - ~~Add support for Facebook connection, conversion notes to FB posts~~
   - Posting directly to FB is not possible ATM due the API restrictions
-- Add MongoDB database for managing multiple accounts - ***Active development***
-- Add Misskey multiaccount support - ***Active development***
+- Add MongoDB database for managing multiple accounts
+- Add Misskey multiaccount support
 - Add support for Facebook pages API - ***Active development***
 - Refactor codebase to OOP classes - ***Coming soon later this year***
-- ~~Simple config dashboard and service endpoints~~
+- Simple config admin dashboard for service endpoints - ***Coming soon later this year***
 - Make out of box docker container support for easy server installation
 - Add Github CI/CD support out of box
 
