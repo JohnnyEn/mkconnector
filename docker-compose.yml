@@ -1,5 +1,14 @@
 version: "3.4"
 services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DOCKER_MONGODB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DOCKER_MONGODB_PASSWORD}
+    ports:
+      - "27017:27017"
+
   express:
     image: node:18-buster
     volumes:
@@ -11,6 +20,9 @@ services:
     ports:
       - "3000:3000"
     environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${DOCKER_MONGODB_USERNAME}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${DOCKER_MONGODB_PASSWORD}
+      - ME_CONFIG_MONGODB_URL=mongodb://${DOCKER_MONGODB_USERNAME}:${DOCKER_MONGODB_PASSWORD}@mongo:27017/
       - NODE_ENV=development
       - PORT=3000
     restart: always
