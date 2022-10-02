@@ -7,13 +7,7 @@ import shortener from '../utils/url-shortener.js';
 
 const TWEET_MAX_CHAR = 280;
 
-const twitterV1Client = new TwitterApi({
-  appKey: process.env.TWITTER_API_KEY,
-  appSecret: process.env.TWITTER_API_KEY_SECRET,
-  accessToken: process.env.TWITTER_ACCESS_TOKEN,
-  accessSecret: process.env.
-  TWITTER_ACCESS_TOKEN_SECRET,
-});
+let twitterV1Client = null;
 
 const processMediaItems = async (misskeyNote) => {
   if (!misskeyNote.fileIds.length) {
@@ -83,7 +77,18 @@ const trimNoteText = async (misskeyNoteText, misskeyNoteId) => {
   return `${trimmedNoteText}... ${shortNoteUrl}`;
 };
 
-const postTweet = async (originalMisskeyNote) => {
+const createTwitterClient = (twitterConfig) => {
+  twitterV1Client = new TwitterApi({
+    appKey: twitterConfig.apiKey,
+    appSecret: twitterConfig.apiKeySecret,
+    accessToken: twitterConfig.accessToken,
+    accessSecret: twitterConfig.accessTokenSecret,
+  });
+}
+
+const postTweet = async (originalMisskeyNote, twitterConfig) => {
+  createTwitterClient(twitterConfig);
+
   if (originalMisskeyNote.text !== null && originalMisskeyNote.text.includes('#mknotwitter')) {
     return;
   }

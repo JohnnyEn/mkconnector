@@ -88,4 +88,4 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-misskey.misskeyTimelineWatcher();
+misskey.startWatching();
