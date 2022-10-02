@@ -65,4 +65,4 @@ dist
 
 team-extension.log
 
-mongo-migrate/migrations/
+migrate-mongo/migrations/
