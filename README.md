@@ -33,8 +33,8 @@
 - Add Twitter V2 API OAUTH support
 - ~~Add support for Facebook connection, conversion notes to FB posts~~
   - Posting directly to FB is not possible ATM due the API restrictions
-- Add MongoDB database for managing multiple accounts
-- Add Misskey multiaccount support
+- Add MongoDB database for managing multiple accounts - ***DONE***
+- Add Misskey multiaccount support - ***DONE***
 - Add support for Facebook pages API - ***Active development***
 - Refactor codebase to OOP classes - ***Coming soon later this year***
 - Simple config admin dashboard for service endpoints - ***Coming soon later this year***
