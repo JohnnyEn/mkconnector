@@ -4,7 +4,11 @@ const databaseName = process.env.NODE_ENV === 'development' ? 'mkconnector_dev' 
 
 
 const connect = async () => {
-  await mongoose.connect(`mongodb://${process.env.DOCKER_MONGODB_USERNAME}:${process.env.DOCKER_MONGODB_PASSWORD}@mongo:27017`, { dbName: databaseName });
+  try {
+    await mongoose.connect(`mongodb://${process.env.DOCKER_MONGODB_USERNAME}:${process.env.DOCKER_MONGODB_PASSWORD}@mongo:27017`, { dbName: databaseName });
+  } catch(error) {
+    console.log('error: ', error);
+  }
 };
 
 export default {

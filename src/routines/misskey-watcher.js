@@ -2,6 +2,7 @@ import WS from 'ws';
 import * as Misskey from 'misskey-js';
 import mongoose from 'mongoose';
 import twitterClient from './twitter-poster.js';
+import facebookClient from './facebook-poster.js';
 import accountSchema from '../schemas/account.js';
 
 const Account = mongoose.model('Account', accountSchema);
@@ -24,7 +25,13 @@ const misskeyTimelineWatcher = async (account) => {
   const homeChannel = stream.useChannel('homeTimeline');
   homeChannel.on('note', async (note) => {
     if (note.userId === currentUser) {
-      await twitterClient.postTweet(note, account.twitter);
+      if (account.config.twitterEnabled) {
+        await twitterClient.postTweet(note, account.twitter);
+      }
+
+      if (account.config.facebookEnabled) {
+        await facebookClient.post(note, account.facebook);
+      }
     }
   });
 };
@@ -60,6 +67,10 @@ const startWatching = () => {
         clientId: process.env.TWITTER_CLIENT_ID,
         clientSecret: process.env.TWITTER_CLIENT_SECRET,
         apiBearerToken: process.env.TWITTER_API_BEARER_TOKEN,
+      },
+      facebook: {
+        accessToken: process.env.FACEBOOK_API_ACCESS_TOKEN,
+        albumId: process.evn.FACEBOOK_ALBUM_ID,
       },
     };
 

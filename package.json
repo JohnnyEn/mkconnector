@@ -19,6 +19,7 @@
     "debug": "~2.6.9",
     "dotenv": "^16.0.2",
     "express": "~4.16.1",
+    "fbgraph": "^1.4.4",
     "file-type": "^18.0.0",
     "http-errors": "^1.6.3",
     "misskey-js": "0.0.14",

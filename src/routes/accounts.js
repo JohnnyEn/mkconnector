@@ -64,6 +64,10 @@ router.post('/create', (req, res, next) => {
       clientSecret: body.twitter.clientSecret,
       apiBearerToken: body.twitter.apiBearerToken,
     },
+    facebook: {
+      accessToken: body.facebook.accessToken,
+      albumId: body.facebook.albumId,
+    },
   });
 
   newAccount.save({}, (error, account) => {

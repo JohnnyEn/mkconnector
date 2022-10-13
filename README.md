@@ -1,5 +1,5 @@
 # Misskey Connector
-## Node.js automatic client to repost your notes from Misskey to Twitter
+## Node.js automatic client to one-way repost your notes from Misskey to Twitter
 ***Note:*** *this repository is under active development, try to keep updating. I'm actively fixing bugs and adding new features*
 
 ### Simple one account usage:
@@ -19,6 +19,7 @@
   - Run migrate-mongo create
   - Copy body of example-migration.js to new created migration file and edit your imported data to MongoDB.
 - You could use MongoDB Compass for document creation.
+- Facebook pages requires to generate non-expiring page token via Graph API Explorer and Graph API token debugger
 - Change bash script privilegies to be executable, `sudo chmod +x prod-run.sh`
 - Deploy edited repository to server, set prod-run.sh to executable and run prod-run.sh bash script
 - NOTE: Never share your MKCONNECTOR_API_REQUEST_AUTH bearer token from .env file. You could be nasty hacked by API requests...
@@ -36,6 +37,9 @@
 - Add MongoDB database for managing multiple accounts - ***DONE***
 - Add Misskey multiaccount support - ***DONE***
 - Add support for Facebook pages API - ***Active development***
+- Enable twitter threading - ***Coming soon later this year***
+- Add support for Instagram Business API ***Coming soon later this year***
+- Add support for Twitter user polls ***Coming soon later this year***
 - Refactor codebase to OOP classes - ***Coming soon later this year***
 - Simple config admin dashboard for service endpoints - ***Coming soon later this year***
 - Make out of box docker container support for easy server installation
