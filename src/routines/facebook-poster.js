@@ -14,6 +14,7 @@ const processMediaItems = async (misskeyNote, facebookAlbumId) => {
       await graphClient.post(`/${facebookAlbumId}/photos?url=${misskeyNote.files[i].url}/${misskeyNote.files[i].name}&published=false`, (error, response) => {
         if (error) {
           console.log(error);
+          reject();
           return;
         }
 
@@ -50,10 +51,10 @@ const post = async (originalMisskeyNote, facebookConfig) => {
 
   if (misskeyNote.files.length) {
     processMediaItems(misskeyNote, facebookConfig.albumId)
-      .then((mediaIdsArray) => {
+      .then(async (mediaIdsArray) => {
         const mediaItemsQuery = generateMediaItemsQuery(mediaIdsArray);
 
-        graphClient.post(`/feed?message=${misskeyNote.text}&${mediaItemsQuery}`, function (error) {
+        await graphClient.post(`/feed?message=${misskeyNote.text}&${mediaItemsQuery}`, function (error) {
           console.log(error);
         });
       })
