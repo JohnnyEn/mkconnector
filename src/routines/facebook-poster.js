@@ -53,9 +53,9 @@ const post = async (originalMisskeyNote, facebookConfig) => {
     processMediaItems(misskeyNote, facebookConfig.albumId)
       .then(async (mediaIdsArray) => {
         const mediaItemsQuery = generateMediaItemsQuery(mediaIdsArray);
-        const message = !misskeyNote.text ? ' ' : misskeyNote.text;
+        const message = !misskeyNote.text ? '' : Buffer.from(misskeyNote.text.replace('#mknotwitter', ''), 'utf-8').toString();
 
-        await graphClient.post(`/feed?message=${message}&${mediaItemsQuery}`, function (error) {
+        await graphClient.post(`/feed?${mediaItemsQuery}`, { message: message }, function (error) {
           console.log(error);
         });
       })
@@ -66,7 +66,7 @@ const post = async (originalMisskeyNote, facebookConfig) => {
     return;
   }
 
-  graphClient.post('/feed', { message: misskeyNote.text }, function(error) {
+  graphClient.post('/feed', { message: misskeyNote.text || ' ' }, function(error) {
     if (error) {
       console.log(error);
     }
