@@ -53,7 +53,7 @@ const post = async (originalMisskeyNote, facebookConfig) => {
     processMediaItems(misskeyNote, facebookConfig.albumId)
       .then(async (mediaIdsArray) => {
         const mediaItemsQuery = generateMediaItemsQuery(mediaIdsArray);
-        const message = misskeyNote.text.length ? misskeyNote.text : ' ';
+        const message = !misskeyNote.text ? ' ' : misskeyNote.text;
 
         await graphClient.post(`/feed?message=${message}&${mediaItemsQuery}`, function (error) {
           console.log(error);
