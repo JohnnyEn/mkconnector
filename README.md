@@ -54,6 +54,8 @@
 - Facebook Graph API ***Coming soon***
 - Official Misskey API library
 
+### For any questions contact me on my Fediverse account - @johnny@chatsubo.cbrpnk.dev. Feel free to fork this repository. Issues are welcome only for critical problems with security.
+
 ### Warning
 Never share to repository your credential data from social sites API!
 
