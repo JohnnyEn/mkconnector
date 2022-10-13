@@ -6,6 +6,7 @@ import { misskeyNoteConverter } from './note-converter.js';
 import shortener from '../utils/url-shortener.js';
 
 const TWEET_MAX_CHAR = 280;
+const MAX_TWEET_MEDIA_LENGTH = 4;
 
 let twitterV1Client = null;
 
@@ -15,7 +16,6 @@ const processMediaItems = async (misskeyNote) => {
   }
 
   return new Promise(async (resolve, reject) => {
-    const MAX_TWEET_MEDIA_LENGTH = 4;
     let mediaIdsArray = [];
 
     for (let i = 0; (i < misskeyNote.files.length && i < MAX_TWEET_MEDIA_LENGTH); i++) {

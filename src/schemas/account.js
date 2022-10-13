@@ -22,7 +22,8 @@ const accountSchema = new Schema({
     apiBearerToken: String,
   },
   facebook: {
-    // TODO: Add here FB credentials after API investigation
+    accessToken: String,
+    albumId: String,
   },
 });
 
