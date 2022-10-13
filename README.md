@@ -51,7 +51,7 @@
 - NodeJS
 - Express
 - Twitter 1 API
-- Facebook Graph API ***Coming soon***
+- Facebook Graph API
 - Official Misskey API library
 
 ### For any questions contact me on my Fediverse account - @johnny@chatsubo.cbrpnk.dev. Feel free to fork this repository. Issues are welcome only for critical problems with security.
