@@ -36,7 +36,7 @@
   - Posting directly to FB is not possible ATM due the API restrictions
 - Add MongoDB database for managing multiple accounts - ***DONE***
 - Add Misskey multiaccount support - ***DONE***
-- Add support for Facebook pages API - ***Active development***
+- Add support for Facebook pages API - ***DONE***
 - Enable twitter threading - ***Coming soon later this year***
 - Add support for Instagram Business API ***Coming soon later this year***
 - Add support for Twitter user polls ***Coming soon later this year***
