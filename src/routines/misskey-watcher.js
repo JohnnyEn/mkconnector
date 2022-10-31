@@ -26,7 +26,8 @@ const misskeyTimelineWatcher = async (account) => {
   homeChannel.on('note', async (note) => {
     if (note.userId === currentUser) {
       if (account.config.twitterEnabled) {
-        await twitterClient.postTweet(note, account.twitter);
+        // TODO: Refactor postTweet parameters
+        await twitterClient.postTweet(note, account.twitter, account.config, currentUser);
       }
 
       if (account.config.facebookEnabled) {
@@ -53,6 +54,7 @@ const startWatching = () => {
     const account = {
       config: {
         twitterEnabled: process.env.MKCONNECTOR_TWITTER_ENABLED,
+        twitterRepliesEnabled: process.env.MKCONNECTOR_TWITTER_REPLIES_ENABLED,
         facebookEnabled: process.env.MKCONNECTOR_FACEBOOK_ENABLED,
       },
       misskey: {
