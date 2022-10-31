@@ -37,11 +37,11 @@
 - Add MongoDB database for managing multiple accounts - ***DONE***
 - Add Misskey multiaccount support - ***DONE***
 - Add support for Facebook pages API - ***DONE***
-- Enable twitter threading - ***Coming soon later this year***
+- Enable twitter threading - ***DONE***
 - Add support for Instagram Business API ***Coming soon later this year***
 - Add support for Twitter user polls ***Coming soon later this year***
-- Refactor codebase to OOP classes - ***Coming soon later this year***
-- Simple config admin dashboard for service endpoints - ***Coming soon later this year***
+- ~~Refactor codebase to OOP classes~~
+- Simple config admin dashboard for service endpoints - ***Coming soon later***
 - Make out of box docker container support for easy server installation
 - Add Github CI/CD support out of box
 
