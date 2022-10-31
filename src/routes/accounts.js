@@ -7,7 +7,6 @@ const router = express.Router();
 
 // GET: Get all accounts from DB
 router.get('/all', (req, res, next) => {
-  console.log([req.headers.auth, process.env.MKCONNECTOR_API_REQUEST_AUTH]);
   if (req.headers.auth !== process.env.MKCONNECTOR_API_REQUEST_AUTH) {
     res.status(401).send('Unauthorized');
     return;
@@ -50,6 +49,7 @@ router.post('/create', (req, res, next) => {
     config: {
       facebookEnabled: body.config.facebookEnabled,
       twitterEnabled: body.config.twitterEnabled,
+      twitterRepliesEnabled: body.config.twitterRepliesEnabled,
     },
     misskey: {
       instanceUrl: body.misskey.instanceUrl,

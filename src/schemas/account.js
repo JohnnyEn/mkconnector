@@ -6,6 +6,7 @@ const accountSchema = new Schema({
   name: String,
   config: {
     twitterEnabled: Boolean,
+    twitterRepliesEnabled: Boolean,
     facebookEnabled: Boolean,
   },
   misskey: {

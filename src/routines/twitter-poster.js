@@ -3,6 +3,7 @@ import { fileTypeFromFile } from 'file-type';
 import wget from 'node-wget-promise';
 import { TwitterApi } from 'twitter-api-v2';
 import { misskeyNoteConverter } from './note-converter.js';
+import TweetStore from './tweet-store.js';
 import shortener from '../utils/url-shortener.js';
 
 const TWEET_MAX_CHAR = 280;
@@ -86,21 +87,26 @@ const createTwitterClient = (twitterConfig) => {
   });
 }
 
-const postTweet = async (originalMisskeyNote, twitterConfig) => {
+const postTweet = async (originalMisskeyNote, twitterConfig, config, currentUser) => {
   createTwitterClient(twitterConfig);
 
   if (originalMisskeyNote.text !== null && originalMisskeyNote.text.includes('#mknotwitter')) {
     return;
   }
 
-  if (originalMisskeyNote.localOnly || typeof originalMisskeyNote.mentions !== 'undefined' || typeof originalMisskeyNote.reply !== 'undefined') {
+  if (
+    originalMisskeyNote.localOnly
+    || typeof originalMisskeyNote.mentions !== 'undefined'
+    || (!config.twitterRepliesEnabled && typeof originalMisskeyNote.reply !== 'undefined')) {
     return;
   }
 
   let misskeyNote = originalMisskeyNote;
 
   if (typeof misskeyNote.renote !== 'undefined') {
+    const originalMisskeyNoteText = misskeyNote.text === null ? '' : misskeyNote.text;
     misskeyNote = originalMisskeyNote.renote;
+    misskeyNote.text = `Fediverse Boost:@${misskeyNote.user.username}${misskeyNote.user.host !== null ? '@' + misskeyNote.user.host : '' }` + originalMisskeyNoteText;
   }
 
   processMediaItems(misskeyNote)
@@ -108,7 +114,26 @@ const postTweet = async (originalMisskeyNote, twitterConfig) => {
       const convertedNoteToTweet = misskeyNoteConverter(misskeyNote, twitterMediaIdsArray);
       const tweetText = await trimNoteText(misskeyNote.text, misskeyNote.id);
 
-      await twitterV1Client.v1.tweet(tweetText, convertedNoteToTweet);
+      if (config.twitterRepliesEnabled && misskeyNote.reply?.userId === currentUser) {
+        const previousTweet = await TweetStore.checkTweet(misskeyNote);
+
+        if (Object.keys(previousTweet).length) {
+          const tweetResponse = await twitterV1Client.v1.reply(
+            tweetText,
+            previousTweet.tweetId,
+          );
+
+          TweetStore.storeTweet(misskeyNote, tweetResponse);
+
+          return;
+        }
+      }
+
+      const tweetResponse = await twitterV1Client.v1.tweet(tweetText, convertedNoteToTweet);
+
+      if (config.twitterRepliesEnabled) {
+        TweetStore.storeTweet(misskeyNote, tweetResponse);
+      }
     });
 };
 
