@@ -121,6 +121,7 @@ const postTweet = async (originalMisskeyNote, twitterConfig, config, currentUser
           const tweetResponse = await twitterV1Client.v1.reply(
             tweetText,
             previousTweet.tweetId,
+            misskeyNoteConverter(misskeyNote, twitterMediaIdsArray),
           );
 
           TweetStore.storeTweet(misskeyNote, tweetResponse);
