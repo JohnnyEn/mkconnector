@@ -8,10 +8,10 @@ const checkTweet = async (note) => {
   const previousTweet = await Tweet.find({ misskeyNoteId: { $eq: note.reply?.id } })
     .catch((error) => {
       console.log(error);
-      return {};
+      return [];
     });
 
-  return previousTweet[0] || {};
+  return previousTweet[0] || [];
 };
 
 const storeTweet = (note, tweet) => {
