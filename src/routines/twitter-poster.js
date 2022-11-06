@@ -104,9 +104,9 @@ const postTweet = async (originalMisskeyNote, twitterConfig, config, currentUser
   let misskeyNote = originalMisskeyNote;
 
   if (typeof misskeyNote.renote !== 'undefined') {
-    const originalMisskeyNoteText = misskeyNote.text === null ? '' : misskeyNote.text;
+    const originalMisskeyNoteText = misskeyNote.renote.text === null ? '' : misskeyNote.renote.text;
     misskeyNote = originalMisskeyNote.renote;
-    misskeyNote.text = `Fediverse Boost:@${misskeyNote.user.username}${misskeyNote.user.host !== null ? '@' + misskeyNote.user.host : '' }` + originalMisskeyNoteText;
+    misskeyNote.text = `Fediverse Boost:@${misskeyNote.user.username}${misskeyNote.user.host !== null ? '@' + misskeyNote.user.host : '' } ` + originalMisskeyNoteText;
   }
 
   processMediaItems(misskeyNote)
