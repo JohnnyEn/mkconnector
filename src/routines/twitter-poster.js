@@ -73,9 +73,10 @@ const trimNoteText = async (misskeyNoteText, misskeyNoteId) => {
   const HELLIP_LENGTH = 4;
   const noteTrimLength = shortNoteUrl.length + HELLIP_LENGTH;
   const lineBreaksNumber = (misskeyNoteText.match(/\n/g)||[]).length;
-  const trimmedNoteText = misskeyNoteText?.slice(0, TWEET_MAX_CHAR).slice(0, -(noteTrimLength + lineBreaksNumber));
+  const trimmedNoteText = misskeyNoteText?.slice(0, TWEET_MAX_CHAR).slice(0, -(noteTrimLength + lineBreaksNumber + HELLIP_LENGTH));
+  const shortenedNote = `${trimmedNoteText}... ${shortNoteUrl}`;
 
-  return `${trimmedNoteText}... ${shortNoteUrl}`;
+  return shortenedNote;
 };
 
 const createTwitterClient = (twitterConfig) => {
@@ -97,17 +98,12 @@ const postTweet = async (originalMisskeyNote, twitterConfig, config, currentUser
   if (
     originalMisskeyNote.localOnly
     || typeof originalMisskeyNote.mentions !== 'undefined'
+    || typeof originalMisskeyNote.renote !== 'undefined'
     || (!config.twitterRepliesEnabled && typeof originalMisskeyNote.reply !== 'undefined')) {
     return;
   }
 
   let misskeyNote = originalMisskeyNote;
-
-  if (typeof misskeyNote.renote !== 'undefined') {
-    const originalMisskeyNoteText = misskeyNote.renote.text === null ? '' : misskeyNote.renote.text;
-    misskeyNote = originalMisskeyNote.renote;
-    misskeyNote.text = `Fediverse Boost:@${misskeyNote.user.username}${misskeyNote.user.host !== null ? '@' + misskeyNote.user.host : '' } ` + originalMisskeyNoteText;
-  }
 
   processMediaItems(misskeyNote)
     .then(async (twitterMediaIdsArray) => {
