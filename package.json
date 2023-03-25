@@ -22,7 +22,7 @@
     "fbgraph": "^1.4.4",
     "file-type": "^18.0.0",
     "http-errors": "^1.6.3",
-    "misskey-js": "0.0.14",
+    "misskey-js": "0.0.15",
     "mongoose": "^6.6.1",
     "morgan": "~1.9.1",
     "node-url-shortener": "^2.0.3",

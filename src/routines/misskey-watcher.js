@@ -72,7 +72,7 @@ const startWatching = () => {
       },
       facebook: {
         accessToken: process.env.FACEBOOK_API_ACCESS_TOKEN,
-        albumId: process.evn.FACEBOOK_ALBUM_ID,
+        albumId: process.env.FACEBOOK_ALBUM_ID,
       },
     };
 
