@@ -15,6 +15,7 @@ const checkTweet = async (note) => {
 };
 
 const storeTweet = (note, tweet) => {
+  console.log(tweet);
   const newTweet = new Tweet({
     misskeyNoteId: note.id,
     tweetId: tweet.id,
