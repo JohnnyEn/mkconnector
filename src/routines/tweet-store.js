@@ -17,7 +17,7 @@ const checkTweet = async (note) => {
 const storeTweet = (note, tweet) => {
   const newTweet = new Tweet({
     misskeyNoteId: note.id,
-    tweetId: tweet.id_str,
+    tweetId: tweet.id,
     expireAt: new Date(Date.now() + FOURTEEN_DAYS_IN_MS),
   });
 
