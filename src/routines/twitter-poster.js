@@ -114,7 +114,7 @@ const postTweet = async (originalMisskeyNote, twitterConfig, config, currentUser
         const previousTweet = await TweetStore.checkTweet(misskeyNote);
 
         if (Object.keys(previousTweet).length) {
-          const tweetResponse = await twitterV1Client.v1.reply(
+          const tweetResponse = await twitterV1Client.v2.reply(
             tweetText,
             previousTweet.tweetId,
             misskeyNoteConverter(misskeyNote, twitterMediaIdsArray),
@@ -126,7 +126,7 @@ const postTweet = async (originalMisskeyNote, twitterConfig, config, currentUser
         }
       }
 
-      const tweetResponse = await twitterV1Client.v1.tweet(tweetText, convertedNoteToTweet);
+      const tweetResponse = await twitterV1Client.v2.tweet(tweetText, convertedNoteToTweet);
 
       if (config.twitterRepliesEnabled) {
         TweetStore.storeTweet(misskeyNote, tweetResponse);
