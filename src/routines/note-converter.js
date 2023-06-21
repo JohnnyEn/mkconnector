@@ -1,7 +1,9 @@
 export const misskeyNoteConverter = (note, noteMediaIds) => {
-  return {
-    media: {
-      media_ids: noteMediaIds,
-    }
-  };
+  if (noteMediaIds.length > 0) {
+    return {
+      media: {
+        media_ids: noteMediaIds,
+      },
+    };
+  }
 };
